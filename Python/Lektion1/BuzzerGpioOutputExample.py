@@ -13,20 +13,30 @@ import time
 
 BUZZER_GPIO_BOARD_PIN = 12
 
-#Main function:
-def main(args):
-    print("Buzzer- Beispiel")
+def initGPIO():
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(BUZZER_GPIO_BOARD_PIN, GPIO.OUT)
+
+def switchOn():
     GPIO.output(BUZZER_GPIO_BOARD_PIN, GPIO.HIGH)
-    time.sleep(0.5) 
-    GPIO.output(BUZZER_GPIO_BOARD_PIN, GPIO.LOW) 
+    
+def switchOff():
+    GPIO.output(BUZZER_GPIO_BOARD_PIN, GPIO.LOW)
+
+def cleanupGPIO():
     GPIO.cleanup()
-    return 0
- 
+
+#Main function:
+def main():
+    print("Buzzer- Beispiel")
+    initGPIO()
+    switchOn()
+    time.sleep(0.5) 
+    switchOff()
+    cleanupGPIO()
+    
 #Checks whether this file has been executed directly or imported from 
 #another file. Only if the file is executed directly, the main function 
 #is called.
 if __name__ == '__main__':
-    import sys
-    sys.exit(main(sys.argv))
+    main()
