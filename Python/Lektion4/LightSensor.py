@@ -43,15 +43,16 @@ class LightSensorBH1750():
     def readLightIntensityLux(self):
         self.BUS.write_byte(self.ADDRESS, self.ONE_TIME_HIGH_RES_MODE_1)
         time.sleep(0.180) #max. 180ms measurement time
-        data = [0,0]
-        data[0] = self.BUS.read_byte(self.ADDRESS)
-        data[1] = self.BUS.read_byte(self.ADDRESS)
+        OFFSET = 0
+        BYTES_TO_READ = 2
+        data = self.BUS.read_i2c_block_data(self.ADDRESS,OFFSET,BYTES_TO_READ)
         lightIntensity = self.convertToNumber(data)
         return lightIntensity
 
 def main():
     lightSensor = LightSensorBH1750()
     lightIntensityLux = lightSensor.readLightIntensityLux()
+    lightIntensityLux = format(lightIntensityLux, '.1f')
     print(lightIntensityLux)
     
 if __name__ == '__main__':
