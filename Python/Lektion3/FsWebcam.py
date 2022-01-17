@@ -35,8 +35,8 @@ def cleanupGPIO():
     GPIO.cleanup()
 
 def main():
-    print("Foto aufnehmen mit grüner UP- Taste!")
     initGPIO()
+    print("Foto aufnehmen mit grüner UP- Taste!")
     try:
         while True:
             time.sleep(5)
