@@ -24,11 +24,11 @@ def initGPIO():
     GPIO.setup(BUTTON_UP_GPIO_BOARD_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.add_event_detect(
         BUTTON_UP_GPIO_BOARD_PIN, GPIO.FALLING, 
-        callback=PIRisActive,
+        callback=isButtonUpPressed,
         bouncetime = 3000 
     )
 
-def PIRisActive(boardPinNumber):
+def isButtonUpPressed(boardPinNumber):
     takeAPicture()
 
 def cleanupGPIO():
